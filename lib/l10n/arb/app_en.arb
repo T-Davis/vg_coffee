@@ -1,0 +1,7 @@
+{
+    "@@locale": "en",
+    "coffeeAppBarTitle": "Coffee",
+    "@coffeeAppBarTitle": {
+        "description": "Text shown in the AppBar of the Coffee Page"
+    }
+}
