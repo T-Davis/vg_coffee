@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:vg_coffee/l10n/l10n.dart';
+import 'package:vg_coffee/core/common_libs.dart';
 
 class CoffeeScreen extends StatelessWidget {
   const CoffeeScreen({super.key});
@@ -15,10 +14,8 @@ class CoffeeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.coffeeAppBarTitle)),
-      body: const Center(child: Text('Coffee Screen')),
+    return const Center(
+      child: Text('Coffee Screen'),
     );
   }
 }
