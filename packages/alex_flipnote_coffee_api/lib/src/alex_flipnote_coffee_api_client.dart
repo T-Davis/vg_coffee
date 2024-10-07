@@ -29,8 +29,12 @@ class AlexFlipnoteCoffeeApiClient {
 
       if (response.statusCode == 200) {
         final contentType = response.headers['content-type'];
+        if (contentType == null || !contentType.startsWith('image/')) {
+          throw ImageRequestFailure();
+        }
+        final imageType = contentType.replaceFirst('image/', '');
         final bytes = response.bodyBytes;
-        final image = Image(contentType: contentType!, bytes: bytes);
+        final image = Image(imageType: imageType, bytes: bytes);
         return image;
       } else {
         throw ImageRequestFailure();

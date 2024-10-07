@@ -82,9 +82,9 @@ void main() {
         expect(
           actual,
           isA<Image>().having((i) => i.bytes, 'bytes', [1, 2, 3]).having(
-            (i) => i.contentType,
-            'contentType',
-            'image/jpeg',
+            (i) => i.imageType,
+            'imageType',
+            'jpeg',
           ),
         );
       });
