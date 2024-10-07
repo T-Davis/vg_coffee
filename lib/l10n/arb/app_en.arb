@@ -1,7 +1,35 @@
 {
     "@@locale": "en",
-    "coffeeAppBarTitle": "Coffee",
-    "@coffeeAppBarTitle": {
-        "description": "Text shown in the AppBar of the Coffee Page"
+    "appBarTitle": "VG Coffee",
+    "@appBarTitle": {
+        "description": "Text shown in the AppBar of the app"
+    },
+    "appBar": "AppBar",
+    "@appBar": {
+        "description": "Semantics label for AppBar"
+    },
+    "coffeeTabIcon": "Coffee tab icon",
+    "@coffeeTabIcon": {
+        "description": "Semantics label for coffee tab icon"
+    },
+    "favoritesTabIcon": "Favorites tab icon",
+    "@favoritesTabIcon": {
+        "description": "Semantics label for favorites tab icon"
+    },
+    "coffeeTabLabel": "Coffee",
+    "@coffeeTabLabel": {
+        "description": "Label for coffee icon"
+    },
+    "favoritesTabLabel": "Favorites",
+    "@favoritesTabLabel": {
+        "description": "Label for favorites icon"
+    },
+    "coffeeTooltip": "Coffee Screen",
+    "@coffeeScreen": {
+        "description": "Tooltip for coffee screen"
+    },
+    "favoritesTooltip": "Favorites screen",
+    "@favoritesScreen": {
+        "description": "Tooltip for favorites screen"
     }
 }
