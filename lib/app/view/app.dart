@@ -1,12 +1,14 @@
 import 'package:coffee_repository/coffee_repository.dart';
-import 'package:get_it/get_it.dart';
 import 'package:vg_coffee/coffee/bloc/coffee_bloc.dart';
 import 'package:vg_coffee/coffee/coffee.dart';
 import 'package:vg_coffee/core/core.dart';
 import 'package:vg_coffee/favorites/favorites.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({required CoffeeRepository coffeeRepository, super.key})
+      : _coffeeRepository = coffeeRepository;
+
+  final CoffeeRepository _coffeeRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,8 @@ class App extends StatelessWidget {
           create: (context) => AppBloc(),
         ),
         BlocProvider(
-          create: (context) => CoffeeBloc(GetIt.instance<CoffeeRepository>())
-            ..add(CoffeeImageRequested()),
+          create: (context) =>
+              CoffeeBloc(_coffeeRepository)..add(CoffeeImageRequested()),
         ),
       ],
       child: MaterialApp(

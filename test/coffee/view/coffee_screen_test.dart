@@ -35,7 +35,7 @@ void main() {
         (tester) async {
       when(() => coffeeBloc.state).thenReturn(const CoffeeState());
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -48,7 +48,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -69,7 +69,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -81,7 +81,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.error));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -96,7 +96,7 @@ void main() {
         'when status is not success or error', (tester) async {
       when(() => coffeeBloc.state).thenReturn(const CoffeeState());
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -123,7 +123,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -141,7 +141,7 @@ void main() {
         'when status is initial', (tester) async {
       when(() => coffeeBloc.state).thenReturn(const CoffeeState());
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -160,7 +160,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -179,7 +179,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.error));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -206,7 +206,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -225,7 +225,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.error));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -243,7 +243,7 @@ void main() {
         'when status is initial', (tester) async {
       when(() => coffeeBloc.state).thenReturn(const CoffeeState());
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -262,7 +262,7 @@ void main() {
       when(() => coffeeBloc.state)
           .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -290,7 +290,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -317,7 +317,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -342,7 +342,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
@@ -379,7 +379,7 @@ void main() {
         ),
       );
 
-      await tester.pumpCoffee(
+      await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );

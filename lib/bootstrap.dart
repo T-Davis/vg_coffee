@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -22,7 +21,9 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+Future<void> bootstrap(
+  FutureOr<Widget> Function(CoffeeRepository coffeeRepository) builder,
+) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -30,7 +31,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
 
   final coffeeRepository = CoffeeRepository();
-  GetIt.instance.registerSingleton<CoffeeRepository>(coffeeRepository);
 
-  runApp(await builder());
+  runApp(await builder(coffeeRepository));
 }
