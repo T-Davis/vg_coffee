@@ -31,5 +31,13 @@
     "favoritesTooltip": "Favorites screen",
     "@favoritesScreen": {
         "description": "Tooltip for favorites screen"
+    },
+    "favoriteButtonLabel": "Favorite",
+    "@favoriteButtonLabel": {
+        "description": "Favorite button label"
+    },
+    "nextButtonLabel": "Next",
+    "@nextButtonLabel": {
+        "description": "Next button label"
     }
 }

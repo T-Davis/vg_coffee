@@ -1,3 +1,6 @@
+import 'package:coffee_repository/coffee_repository.dart';
+import 'package:get_it/get_it.dart';
+import 'package:vg_coffee/coffee/bloc/coffee_bloc.dart';
 import 'package:vg_coffee/coffee/coffee.dart';
 import 'package:vg_coffee/core/core.dart';
 import 'package:vg_coffee/favorites/favorites.dart';
@@ -7,8 +10,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CoffeeBloc(GetIt.instance<CoffeeRepository>())
+            ..add(CoffeeImageRequested()),
+        ),
+      ],
       child: MaterialApp(
         theme: ThemeData(
           appBarTheme: AppBarTheme(

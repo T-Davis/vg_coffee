@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_it/get_it.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -27,7 +29,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
 
-  // Add cross-flavor configuration here
+  final coffeeRepository = CoffeeRepository();
+  GetIt.instance.registerSingleton<CoffeeRepository>(coffeeRepository);
 
   runApp(await builder());
 }
