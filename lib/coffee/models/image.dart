@@ -27,4 +27,10 @@ class Image extends Equatable {
 
   @override
   List<Object?> get props => [isFavorite, imageType, bytes];
+
+  @override
+  String toString() {
+    return 'Image(isFavorite: $isFavorite, imageType: $imageType, '
+        'bytesLength: ${bytes.length})';
+  }
 }
