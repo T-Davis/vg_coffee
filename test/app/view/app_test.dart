@@ -7,6 +7,7 @@ void main() {
   group('App', () {
     testWidgets('renders CoffeeScreen', (tester) async {
       await tester.pumpWidget(const App());
+
       expect(find.byType(CoffeeScreen), findsOneWidget);
       expect(find.byType(FavoritesScreen), findsNothing);
     });
@@ -41,7 +42,7 @@ void main() {
       // Navigate to CoffeeScreen.
       await tester.tap(find.byIcon(Icons.coffee));
       await tester.pumpAndSettle();
-      
+
       expect(find.byType(CoffeeScreen), findsOneWidget);
       expect(find.byType(FavoritesScreen), findsNothing);
     });
