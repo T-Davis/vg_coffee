@@ -61,7 +61,7 @@ void main() {
       test('gets images from local storage', () async {
         final imageFile1 = file;
         final imageFile2 = file;
-        when(directory.listSync).thenReturn([
+        when(() => directory.listSync(recursive: true)).thenReturn([
           imageFile1,
           imageFile2,
         ]);

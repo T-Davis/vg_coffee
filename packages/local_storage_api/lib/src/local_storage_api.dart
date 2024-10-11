@@ -57,9 +57,9 @@ class LocalStorageApi {
   Future<List<Image>> getImages() async {
     try {
       final directory = await _getLocalStorageDirectory();
-      final files = directory.listSync();
+      final files = directory.listSync(recursive: true);
       final imagePaths = files.where((element) {
-        return element.path.startsWith('/images/');
+        return element is File && element.path.contains('/images/');
       }).toList();
 
       final images = <Image>[];
