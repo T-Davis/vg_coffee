@@ -1,5 +1,4 @@
 import 'package:coffee_repository/coffee_repository.dart';
-import 'package:vg_coffee/coffee/bloc/coffee_bloc.dart';
 import 'package:vg_coffee/coffee/coffee.dart';
 import 'package:vg_coffee/core/core.dart';
 import 'package:vg_coffee/favorites/favorites.dart';
@@ -15,11 +14,18 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          lazy: false,
           create: (context) => AppBloc(),
         ),
         BlocProvider(
+          lazy: false,
           create: (context) =>
               CoffeeBloc(_coffeeRepository)..add(CoffeeImageRequested()),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (context) => FavoritesBloc(_coffeeRepository)
+            ..add(FavoritesLoadImagesRequested()),
         ),
       ],
       child: MaterialApp(
@@ -60,23 +66,40 @@ class _AppViewState extends State<_AppView> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          l10n.appBarTitle,
-          semanticsLabel: '${l10n.appBarTitle} ${l10n.appBar}',
+    return BlocListener<CoffeeBloc, CoffeeState>(
+      listenWhen: (previous, current) =>
+          previous.status == CoffeeStatus.favoritingImage &&
+          current.status == CoffeeStatus.success,
+      listener: (context, state) {
+        state.image!.isFavorite
+            ? context.read<FavoritesBloc>().add(
+                  FavoritesAddImageRequested(
+                    filename: state.image!.filename,
+                    bytes: state.image!.bytes,
+                  ),
+                )
+            : context
+                .read<FavoritesBloc>()
+                .add(FavoritesRemoveImageRequested(state.image!.filename));
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            l10n.appBarTitle,
+            semanticsLabel: '${l10n.appBarTitle} ${l10n.appBar}',
+          ),
         ),
-      ),
-      body: BlocListener<AppBloc, AppState>(
-        listener: (context, state) {
-          state.selectedTab == 0 ? _animateToPage(0) : _animateToPage(1);
-        },
-        child: PageView(
-          controller: _pageController,
-          children: _screens,
+        body: BlocListener<AppBloc, AppState>(
+          listener: (context, state) {
+            state.selectedTab == 0 ? _animateToPage(0) : _animateToPage(1);
+          },
+          child: PageView(
+            controller: _pageController,
+            children: _screens,
+          ),
         ),
+        bottomNavigationBar: const VgcBottomNavigationBar(),
       ),
-      bottomNavigationBar: const VgcBottomNavigationBar(),
     );
   }
 

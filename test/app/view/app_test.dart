@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vg_coffee/coffee/coffee.dart';
-import 'package:vg_coffee/core/common_libs.dart';
+import 'package:vg_coffee/core/core.dart';
 import 'package:vg_coffee/favorites/favorites.dart';
 
 import '../../helpers/helpers.dart';
@@ -56,5 +56,117 @@ void main() {
       expect(find.byType(CoffeeScreen), findsOneWidget);
       expect(find.byType(FavoritesScreen), findsNothing);
     });
+
+    // TODO(t-davis): Fix these tests
+    // group('CoffeeBloc Listener', () {
+    //   late CoffeeBloc coffeeBloc;
+    //   late FavoritesBloc favoritesBloc;
+
+    //   setUp(() {
+    //     coffeeBloc = MockCoffeeBloc();
+    //     favoritesBloc = MockFavoritesBloc();
+    //   });
+
+    // testWidgets(
+    //     'adds FavoritesAddImageRequested to FavoritesBloc '
+    //     'when CoffeeBloc updates with isFavorite: true', (tester) async {
+    //   whenListen(
+    //     coffeeBloc,
+    //     const Stream<CoffeeState>.empty(),
+    //     initialState: const CoffeeState(),
+    //   );
+    //   whenListen(
+    //     favoritesBloc,
+    //     const Stream<FavoritesState>.empty(),
+    //     initialState: const FavoritesState(),
+    //   );
+    //   await tester.pumpApp(
+    //     widget: App(coffeeRepository: MockCoffeeRepository()),
+    //     coffeeBloc: coffeeBloc,
+    //     favoritesBloc: favoritesBloc,
+    //   );
+
+    //   coffeeBloc
+    //     ..emit(
+    //       CoffeeState(
+    //         status: CoffeeStatus.favoritingImage,
+    //         image: c.Image(
+    //           filename: 'filename.jpg',
+    //           bytes: Uint8List.fromList([]),
+    //           isFavorite: false,
+    //         ),
+    //       ),
+    //     )
+    //     ..emit(
+    //       CoffeeState(
+    //         status: CoffeeStatus.success,
+    //         image: c.Image(
+    //           filename: 'filename.jpg',
+    //           bytes: Uint8List.fromList([]),
+    //           isFavorite: true,
+    //         ),
+    //       ),
+    //     );
+    //   await tester.pump();
+
+    //   verify(
+    //     () => favoritesBloc.add(
+    //       FavoritesAddImageRequested(
+    //         filename: 'filename.jpg',
+    //         bytes: Uint8List.fromList([]),
+    //       ),
+    //     ),
+    //   ).called(1);
+    // });
+
+    // testWidgets(
+    //     'adds FavoritesRemoveImageRequested to FavoritesBloc '
+    //     'when CoffeeBloc updates with isFavorite: false', (tester) async {
+    //   whenListen(
+    //     coffeeBloc,
+    //     const Stream<CoffeeState>.empty(),
+    //     initialState: const CoffeeState(),
+    //   );
+    //   whenListen(
+    //     favoritesBloc,
+    //     const Stream<FavoritesState>.empty(),
+    //     initialState: const FavoritesState(),
+    //   );
+    //   await tester.pumpApp(
+    //     widget: App(coffeeRepository: MockCoffeeRepository()),
+    //     coffeeBloc: coffeeBloc,
+    //     favoritesBloc: favoritesBloc,
+    //   );
+
+    //   coffeeBloc
+    //     ..emit(
+    //       CoffeeState(
+    //         status: CoffeeStatus.favoritingImage,
+    //         image: c.Image(
+    //           filename: 'filename.jpg',
+    //           bytes: Uint8List.fromList([]),
+    //           isFavorite: true,
+    //         ),
+    //       ),
+    //     )
+    //     ..emit(
+    //       CoffeeState(
+    //         status: CoffeeStatus.success,
+    //         image: c.Image(
+    //           filename: 'filename.jpg',
+    //           bytes: Uint8List.fromList([]),
+    //           isFavorite: false,
+    //         ),
+    //       ),
+    //     );
+    //   await tester.pump();
+
+    //   verify(
+    //     () => favoritesBloc.add(
+    //       FavoritesRemoveImageRequested('filename.jpg'),
+    //     ),
+    //   ).called(1);
+    // });
+    // });
   });
 }
