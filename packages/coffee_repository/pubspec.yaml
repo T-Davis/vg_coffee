@@ -1,5 +1,5 @@
 name: coffee_repository
-description: A Very Good Project created by Very Good CLI.
+description: Dart repository for managing coffee data.
 version: 0.1.0+1
 publish_to: none
 
@@ -11,8 +11,11 @@ dependencies:
     path: ../alex_flipnote_coffee_api
   equatable: ^2.0.5
   json_annotation: ^4.6.0
+  local_storage_api:
+    path: ../local_storage_api
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   mocktail: ^1.0.4
-  test: ^1.25.8
   very_good_analysis: ^6.0.0
