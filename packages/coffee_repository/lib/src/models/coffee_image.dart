@@ -6,12 +6,12 @@ import 'dart:typed_data';
 class CoffeeImage {
   /// {@macro coffee_image}
   const CoffeeImage({
-    required this.imageType,
+    required this.filename,
     required this.bytes,
   });
 
-  /// The image type, for example `png`.
-  final String imageType;
+  /// The file name, for example `image.png`.
+  final String filename;
 
   /// The raw bytes of the image data.
   final Uint8List bytes;

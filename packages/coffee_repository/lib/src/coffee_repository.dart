@@ -15,7 +15,7 @@ class CoffeeRepository {
   Future<CoffeeImage> fetchCoffeeImage() async {
     final image = await _coffeeApiClient.fetchRandomImage();
     return CoffeeImage(
-      imageType: image.imageType,
+      filename: image.filename,
       bytes: image.bytes,
     );
   }
