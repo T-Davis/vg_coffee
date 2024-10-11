@@ -34,7 +34,6 @@ void main() {
         final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.bodyBytes).thenReturn(Uint8List.fromList([]));
-        when(() => response.headers).thenReturn({'content-type': 'image/jpeg'});
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         try {
           await apiClient.fetchRandomImage();
@@ -43,7 +42,7 @@ void main() {
           () => httpClient.get(
             Uri.https(
               'coffee.alexflipnote.dev',
-              '/random',
+              '/random.json',
             ),
           ),
         ).called(1);
@@ -74,17 +73,19 @@ void main() {
       test('returns Image on valid response', () async {
         final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
+        when(() => response.body).thenReturn(
+          '{"file": "https://coffee.alexflipnote.dev/1234.jpeg"}',
+        );
         when(() => response.bodyBytes)
             .thenReturn(Uint8List.fromList([1, 2, 3]));
-        when(() => response.headers).thenReturn({'content-type': 'image/jpeg'});
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         final actual = await apiClient.fetchRandomImage();
         expect(
           actual,
           isA<Image>().having((i) => i.bytes, 'bytes', [1, 2, 3]).having(
-            (i) => i.imageType,
-            'imageType',
-            'jpeg',
+            (i) => i.filename,
+            'filename',
+            '1234.jpeg',
           ),
         );
       });

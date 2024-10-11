@@ -6,12 +6,12 @@ import 'dart:typed_data';
 class Image {
   /// {@macro image}
   const Image({
-    required this.imageType,
+    required this.filename,
     required this.bytes,
   });
 
-  /// The type of the image.
-  final String imageType;
+  /// The name of the image.
+  final String filename;
 
   /// The raw bytes of the image data.
   final Uint8List bytes;

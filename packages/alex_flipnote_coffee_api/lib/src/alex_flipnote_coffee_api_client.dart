@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:alex_flipnote_coffee_api/alex_flipnote_coffee_api.dart';
 import 'package:alex_flipnote_coffee_api/src/models/image.dart';
@@ -20,24 +21,43 @@ class AlexFlipnoteCoffeeApiClient {
 
   final http.Client _httpClient;
 
-  /// Fetches a random [Image] `/random`.
+  /// Fetches a random coffee image.
+  ///
+  /// Returns an [Image] object.
   Future<Image> fetchRandomImage() async {
+    final String fileUrl;
+    final String filename;
     try {
-      final request = Uri.https(_baseUrl, '/random');
+      // Request a random file url.
+      final jsonRequest = Uri.https(_baseUrl, '/random.json');
+      final jsonResponse = await _httpClient.get(jsonRequest);
 
+      /*
+          Sample response:
+          {
+          "file": "https://coffee.alexflipnote.dev/O7w9wwX0Ym0_coffee.png"
+          }
+        */
+
+      if (jsonResponse.statusCode == 200) {
+        final jsonData = jsonDecode(jsonResponse.body) as Map<String, dynamic>;
+        fileUrl = jsonData['file'] as String;
+      } else {
+        throw Exception();
+      }
+
+      // Request image from file url.
+      final request = Uri.parse(fileUrl);
       final response = await _httpClient.get(request);
 
       if (response.statusCode == 200) {
-        final contentType = response.headers['content-type'];
-        if (contentType == null || !contentType.startsWith('image/')) {
-          throw ImageRequestFailure();
-        }
-        final imageType = contentType.replaceFirst('image/', '');
+        filename = Uri.parse(fileUrl).pathSegments.last;
         final bytes = response.bodyBytes;
-        final image = Image(imageType: imageType, bytes: bytes);
+        final image = Image(filename: filename, bytes: bytes);
+
         return image;
       } else {
-        throw ImageRequestFailure();
+        throw Exception();
       }
     } catch (e) {
       throw ImageRequestFailure();
