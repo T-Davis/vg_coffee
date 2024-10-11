@@ -40,7 +40,7 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(status: CoffeeStatus.error));
+      emit(state.copyWith(status: CoffeeStatus.errorSavingOrDeletingImage));
     }
   }
 
@@ -63,7 +63,7 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(status: CoffeeStatus.error));
+      emit(state.copyWith(status: CoffeeStatus.errorFetchingImage));
     }
   }
 }

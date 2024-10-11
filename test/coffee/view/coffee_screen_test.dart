@@ -1,16 +1,12 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:vg_coffee/coffee/bloc/coffee_bloc.dart';
 import 'package:vg_coffee/coffee/models/image.dart' as c;
 import 'package:vg_coffee/coffee/view/coffee_screen.dart';
+import 'package:vg_coffee/core/core.dart';
 
 import '../../helpers/helpers.dart';
-
-class MockCoffeeBloc extends MockBloc<CoffeeEvent, CoffeeState>
-    implements CoffeeBloc {}
 
 const pngBytes = [
   255, 216, 255, 224, 0, 16, 74, 70, 73, 70, 0, 1, 1,
@@ -77,16 +73,25 @@ void main() {
       expect(find.byType(Image), findsOneWidget);
     });
 
-    testWidgets('renders Icon.error in error state', (tester) async {
-      when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.error));
+    testWidgets('renders Notice with correct bytes in errorFetchingImage state',
+        (tester) async {
+      when(() => coffeeBloc.state).thenReturn(
+        CoffeeState(
+          status: CoffeeStatus.errorFetchingImage,
+          image: c.Image(
+            isFavorite: false,
+            filename: 'image.png',
+            bytes: Uint8List.fromList(pngBytes),
+          ),
+        ),
+      );
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
 
-      expect(find.byIcon(Icons.error), findsOneWidget);
+      expect(find.byType(Notice), findsOneWidget);
     });
   });
 
@@ -175,9 +180,10 @@ void main() {
 
     testWidgets(
         'Favorite button is disabled '
-        'when status is error', (tester) async {
-      when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.error));
+        'when status is errorFetchingImage', (tester) async {
+      when(() => coffeeBloc.state).thenReturn(
+        const CoffeeState(status: CoffeeStatus.errorFetchingImage),
+      );
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
@@ -221,14 +227,42 @@ void main() {
 
     testWidgets(
         'Next button is enabled '
-        'when status is error', (tester) async {
-      when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.error));
+        'when status is errorFetchingImage', (tester) async {
+      when(() => coffeeBloc.state).thenReturn(
+        const CoffeeState(status: CoffeeStatus.errorFetchingImage),
+      );
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
         coffeeBloc: coffeeBloc,
       );
+
+      expect(
+        tester
+            .widget<ElevatedButton>(find.byKey(const ValueKey('next')))
+            .onPressed,
+        isNotNull,
+      );
+    });
+    testWidgets(
+        'Next button is enabled '
+        'when status is errorSavingOrDeletingImage', (tester) async {
+      when(() => coffeeBloc.state).thenReturn(
+        CoffeeState(
+          status: CoffeeStatus.errorSavingOrDeletingImage,
+          image: c.Image(
+            filename: 'filename.jpg',
+            bytes: Uint8List.fromList(pngBytes),
+            isFavorite: false,
+          ),
+        ),
+      );
+
+      await tester.pumpApp(
+        widget: const CoffeeScreen(),
+        coffeeBloc: coffeeBloc,
+      );
+      await tester.pumpAndSettle();
 
       expect(
         tester

@@ -25,11 +25,11 @@
         "description": "Label for favorites icon"
     },
     "coffeeTooltip": "Coffee Screen",
-    "@coffeeScreen": {
+    "@coffeeTooltip": {
         "description": "Tooltip for coffee screen"
     },
     "favoritesTooltip": "Favorites screen",
-    "@favoritesScreen": {
+    "@favoritesTooltip": {
         "description": "Tooltip for favorites screen"
     },
     "favoriteButtonLabel": "Favorite",
@@ -39,5 +39,37 @@
     "nextButtonLabel": "Next",
     "@nextButtonLabel": {
         "description": "Next button label"
+    },
+    "coffeePicturesShow": "Your favorite coffee pictures show up here",
+    "@coffeePicturesShow": {
+        "description": "Text on favorites screen notice when no favorites are saved"
+    },
+    "headToCoffeeTab": "Head to the Coffee tab to add some",
+    "@headToCoffeeTab": {
+        "description": "Subtext on favorites screen notice when no favorites are saved"
+    },
+    "troubleRetrievingFavorites": "We are having trouble retrieving your favorites",
+    "@troubleRetrievingFavorites": {
+        "description": "Text on favorites screen notice when there was an error retrieving favorites"
+    },
+    "tapRetry": "Tap Retry to try again",
+    "@tapRetry": {
+        "description": "Subtext on favorites screen notice when there was an error retrieving favorites"
+    },
+    "retry": "Retry",
+    "@retry": {
+        "description": "Text on Retry button"
+    },
+    "couldNotLoadTheImage": "Hmm, it seems we could not load the image",
+    "@couldNotLoadTheImage": {
+        "description": "Text on coffee screen notice when image could not be loaded"
+    },
+    "checkYourInternetConnection": "Check your internet connection and tap Next to try again",
+    "@checkYourInternetConnection": {
+        "description": "Subtext on coffee screen notice when image could not be loaded"
+    },
+    "whoopsSavingOrRemoving": "Whoops, saving or removing your favorite did not work",
+    "@whoopsSavingOrRemoving": {
+        "description": "SnackBar text when saving or removing a favorite fails"
     }
 }

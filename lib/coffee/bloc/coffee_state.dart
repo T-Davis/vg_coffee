@@ -5,7 +5,8 @@ enum CoffeeStatus {
   success,
   loadingImage,
   favoritingImage,
-  error,
+  errorFetchingImage,
+  errorSavingOrDeletingImage,
 }
 
 class CoffeeState extends Equatable {
