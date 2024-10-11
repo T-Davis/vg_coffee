@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: alex_flipnote_coffee_api,local_storage_api
+dependency_overrides:
+  alex_flipnote_coffee_api:
+    path: ../alex_flipnote_coffee_api
+  local_storage_api:
+    path: ../local_storage_api
