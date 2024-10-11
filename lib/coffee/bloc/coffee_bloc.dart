@@ -20,19 +20,36 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
   FutureOr<void> _onFavoriteStatusChanged(
     CoffeeImageFavoriteStatusChanged event,
     Emitter<CoffeeState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        image: state.image?.copyWith(isFavorite: event.isFavorite),
-      ),
-    );
+  ) async {
+    emit(state.copyWith(status: CoffeeStatus.favoritingImage));
+
+    try {
+      if (event.isFavorite == true) {
+        await _coffeeRepository.saveCoffeeImage(
+          bytes: state.image!.bytes,
+          filename: state.image!.filename,
+        );
+      } else {
+        await _coffeeRepository.deleteCoffeeImage(state.image!.filename);
+      }
+
+      emit(
+        state.copyWith(
+          status: CoffeeStatus.success,
+          image: state.image?.copyWith(isFavorite: event.isFavorite),
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: CoffeeStatus.error));
+    }
   }
 
   FutureOr<void> _onCoffeeImageRequested(
     CoffeeImageRequested event,
     Emitter<CoffeeState> emit,
   ) async {
-    emit(state.copyWith(status: CoffeeStatus.loading));
+    emit(state.copyWith(status: CoffeeStatus.loadingImage));
+
     try {
       final image = await _coffeeRepository.fetchCoffeeImage();
       emit(

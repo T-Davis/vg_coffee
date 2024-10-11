@@ -3,7 +3,8 @@ part of 'coffee_bloc.dart';
 enum CoffeeStatus {
   initial,
   success,
-  loading,
+  loadingImage,
+  favoritingImage,
   error,
 }
 

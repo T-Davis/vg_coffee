@@ -26,7 +26,15 @@ void main() {
 
     group('CoffeeImageFavoriteStatusChanged', () {
       blocTest<CoffeeBloc, CoffeeState>(
-        'emits updated image with isFavorite set to event.isFavorite',
+        'emits updated Image with isFavorite set to event.isFavorite',
+        setUp: () {
+          when(
+            () => coffeeRepository.saveCoffeeImage(
+              bytes: Uint8List.fromList([]),
+              filename: 'image.png',
+            ),
+          ).thenAnswer((_) async {});
+        },
         build: () => CoffeeBloc(coffeeRepository),
         seed: () => CoffeeState(
           status: CoffeeStatus.success,
@@ -40,6 +48,14 @@ void main() {
           CoffeeImageFavoriteStatusChanged(isFavorite: true),
         ),
         expect: () => <CoffeeState>[
+          CoffeeState(
+            status: CoffeeStatus.favoritingImage,
+            image: c.Image(
+              isFavorite: false,
+              filename: 'image.png',
+              bytes: Uint8List.fromList([]),
+            ),
+          ),
           CoffeeState(
             status: CoffeeStatus.success,
             image: c.Image(
@@ -67,7 +83,7 @@ void main() {
         build: () => CoffeeBloc(coffeeRepository),
         act: (bloc) => bloc.add(CoffeeImageRequested()),
         expect: () => <CoffeeState>[
-          const CoffeeState(status: CoffeeStatus.loading),
+          const CoffeeState(status: CoffeeStatus.loadingImage),
           CoffeeState(
             status: CoffeeStatus.success,
             image: c.Image(
@@ -90,7 +106,7 @@ void main() {
         build: () => CoffeeBloc(coffeeRepository),
         act: (bloc) => bloc.add(CoffeeImageRequested()),
         expect: () => <CoffeeState>[
-          const CoffeeState(status: CoffeeStatus.loading),
+          const CoffeeState(status: CoffeeStatus.loadingImage),
           const CoffeeState(status: CoffeeStatus.error),
         ],
       );

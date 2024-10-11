@@ -40,9 +40,13 @@ class _CoffeeImage extends StatelessWidget {
           return switch (state.status) {
             CoffeeStatus.initial =>
               const Center(child: CircularProgressIndicator()),
-            CoffeeStatus.loading =>
+            CoffeeStatus.loadingImage =>
               const Center(child: CircularProgressIndicator()),
             CoffeeStatus.success => Image.memory(
+                state.image!.bytes,
+                fit: BoxFit.contain,
+              ),
+            CoffeeStatus.favoritingImage => Image.memory(
                 state.image!.bytes,
                 fit: BoxFit.contain,
               ),

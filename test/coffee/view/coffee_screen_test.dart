@@ -46,7 +46,7 @@ void main() {
     testWidgets('renders CircularProgressIndicator in loading state',
         (tester) async {
       when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
+          .thenReturn(const CoffeeState(status: CoffeeStatus.loadingImage));
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
@@ -158,7 +158,7 @@ void main() {
         'Favorite button is disabled '
         'when status is loading', (tester) async {
       when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
+          .thenReturn(const CoffeeState(status: CoffeeStatus.loadingImage));
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
@@ -260,7 +260,7 @@ void main() {
         'Next button is disabled '
         'when status is loading', (tester) async {
       when(() => coffeeBloc.state)
-          .thenReturn(const CoffeeState(status: CoffeeStatus.loading));
+          .thenReturn(const CoffeeState(status: CoffeeStatus.loadingImage));
 
       await tester.pumpApp(
         widget: const CoffeeScreen(),
