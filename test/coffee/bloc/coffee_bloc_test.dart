@@ -32,7 +32,7 @@ void main() {
           status: CoffeeStatus.success,
           image: c.Image(
             isFavorite: false,
-            imageType: 'png',
+            filename: 'image.png',
             bytes: Uint8List.fromList([]),
           ),
         ),
@@ -44,7 +44,7 @@ void main() {
             status: CoffeeStatus.success,
             image: c.Image(
               isFavorite: true,
-              imageType: 'png',
+              filename: 'image.png',
               bytes: Uint8List.fromList([]),
             ),
           ),
@@ -59,7 +59,7 @@ void main() {
         setUp: () {
           when(() => coffeeRepository.fetchCoffeeImage()).thenAnswer(
             (_) async => CoffeeImage(
-              imageType: 'png',
+              filename: 'image.png',
               bytes: Uint8List.fromList([]),
             ),
           );
@@ -72,7 +72,7 @@ void main() {
             status: CoffeeStatus.success,
             image: c.Image(
               isFavorite: false,
-              imageType: 'png',
+              filename: 'image.png',
               bytes: Uint8List.fromList([]),
             ),
           ),

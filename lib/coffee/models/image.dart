@@ -5,32 +5,32 @@ import 'package:equatable/equatable.dart';
 class Image extends Equatable {
   const Image({
     required this.isFavorite,
-    required this.imageType,
+    required this.filename,
     required this.bytes,
   });
 
   final bool isFavorite;
-  final String imageType;
+  final String filename;
   final Uint8List bytes;
 
   Image copyWith({
     bool? isFavorite,
-    String? imageType,
+    String? filename,
     Uint8List? bytes,
   }) {
     return Image(
       isFavorite: isFavorite ?? this.isFavorite,
-      imageType: imageType ?? this.imageType,
+      filename: filename ?? this.filename,
       bytes: bytes ?? this.bytes,
     );
   }
 
   @override
-  List<Object?> get props => [isFavorite, imageType, bytes];
+  List<Object?> get props => [isFavorite, filename, bytes];
 
   @override
   String toString() {
-    return 'Image(isFavorite: $isFavorite, imageType: $imageType, '
+    return 'Image(isFavorite: $isFavorite, filename: $filename, '
         'bytesLength: ${bytes.length})';
   }
 }

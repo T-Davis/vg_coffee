@@ -40,7 +40,7 @@ class CoffeeBloc extends Bloc<CoffeeEvent, CoffeeState> {
           status: CoffeeStatus.success,
           image: Image(
             isFavorite: false,
-            imageType: image.imageType,
+            filename: image.filename,
             bytes: image.bytes,
           ),
         ),
